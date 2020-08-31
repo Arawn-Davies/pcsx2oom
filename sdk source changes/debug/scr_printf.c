@@ -202,7 +202,7 @@ void init_scr()
        Init_GS( 0, 2, 1);
 
    //Init_GS( 0, ((*((char*)0x1FC7FF52))=='E')+2, 1);
-   ////Init_GS( 0, ((*((char*)0x1FC7FF52))=='E')+2-1, 1);       // força PAL
+   ////Init_GS( 0, ((*((char*)0x1FC7FF52))=='E')+2-1, 1);       // forï¿½a PAL
    //printf("debug GS : %d\n", ((*((char*)0x1FC7FF52))=='E')+2);      // 3 for PAL and 2 for NTSC
    ////Init_GS( 0, 0+2, 1);
    ////asm volatile ("	nop");

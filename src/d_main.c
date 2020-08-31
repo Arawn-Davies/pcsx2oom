@@ -34,6 +34,13 @@ static const char rcsid[] = "$Id: d_main.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 #include <stdio.h>
 #include <stdlib.h>
 #include <tamtypes.h>
+#include <sifcmd.h>
+#include <kernel.h>
+#include <stdarg.h>
+#include <debug.h>
+
+static int X = 0, Y = 0;
+static int MX=80, MY=25;
 
 /// cosmito
 static char padBuf[256] __attribute__((aligned(64)));
@@ -1012,6 +1019,59 @@ int padUtils_ReadButton(int port, int slot, u32 old_pad, u32 new_pad)
     return 0;   // 0 means no button was pressed
 }
 
+static void  clear_line( int Y)
+{
+   int i;
+   for (i=0; i < MX; i++)
+    scr_putchar( i*7 , Y * 8, 0, 219);
+
+
+}
+
+void scr_printf_nocursor(const char *format, ...)
+{
+   va_list	opt;
+   u8		buff[2048], c;
+   int		i, bufsz, j;
+   
+   
+   va_start(opt, format);
+   bufsz = vsnprintf( buff, sizeof(buff), format, opt);
+
+   for (i = 0; i < bufsz; i++)
+       {
+       c = buff[i];
+       switch (c)
+          {
+          case		'\n':
+                             X = 0;
+                             Y ++;
+                             if (Y == MY)
+                                 Y = 0;
+                             clear_line(Y);
+                             break;
+          case      '\t':
+                             for (j = 0; j < 5; j++) {
+                             	scr_putchar( X*7 , Y * 8, 0xffffff, ' ');
+                             	X++;
+                             }
+                             break;
+          default:
+             		     scr_putchar( X*7 , Y * 8, 0xffffff, c);
+                             X++;
+                             if (X == MX)
+                                {
+                                X = 0;
+                                Y++;
+                                if (Y == MY)
+                                   Y = 0;
+                                clear_line(Y);
+                                }
+          }
+       }
+    // scr_putchar( X*7 , Y * 8, 0xffffff, 219);       // cosmito : no cursor
+}
+
 void checkForWadFile(char* wadname, char** foundwadfiles, char* foundfile, int* foundwadfiles_index, int* nWadsFound)
 {
     if ( !access (wadname, R_OK) )
@@ -1236,7 +1296,7 @@ void IdentifyVersionAndSelect (void)        // cosmito
                 break;
             }
 
-            gsKit_vsync();
+            gsKit_vsync_wait();
             if(timeout != 0)
                 timeout--;
         }
