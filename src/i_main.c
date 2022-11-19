@@ -341,7 +341,7 @@ int main( int argc, char**	argv )
     int handle = fioOpen ("mc0:PS2DOOM/doomsav0.dsg", O_RDONLY);
     if (handle < 0)
     {
-        mkdir("mc0:PS2DOOM", 0777, O_RDONLY | O_WRONLY; // Make sure it exists
+        mkdir("mc0:PS2DOOM", 0777, O_RDONLY | O_WRONLY); // Make sure it exists
         printf(" ... created mc0:PS2DOOM ...\n");
     }
     else
