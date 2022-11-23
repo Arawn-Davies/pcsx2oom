@@ -540,10 +540,10 @@ ST_Responder (event_t* ev)
   // if a user keypress...
   else if (ev->type == ev_keydown)
   {
-    if (!netgame)
+    if (!netgame && gameskill != sk_nightmare)
     {
-      // b. - enabled for more debug fun.
-      // if (gameskill != sk_nightmare) {
+      //
+      //
       
       // 'dqd' cheat for toggleable god mode
       if (cht_CheckCheat(&cheat_god, ev->data1))
@@ -683,7 +683,7 @@ ST_Responder (event_t* ev)
       
       if (gamemode == commercial)
       {
-	epsd = 0;
+	epsd = 1;
 	map = (buf[0] - '0')*10 + buf[1] - '0';
       }
       else
@@ -804,7 +804,7 @@ void ST_updateFaceWidget(void)
 	    // being attacked
 	    priority = 7;
 	    
-	    if (plyr->health - st_oldhealth > ST_MUCHPAIN)
+	    if (st_oldhealth - plyr->health > ST_MUCHPAIN)
 	    {
 		st_facecount = ST_TURNCOUNT;
 		st_faceindex = ST_calcPainOffset() + ST_OUCHOFFSET;
