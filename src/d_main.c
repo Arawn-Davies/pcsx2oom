@@ -38,6 +38,7 @@ static const char rcsid[] = "$Id: d_main.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 #include <kernel.h>
 #include <stdarg.h>
 #include <debug.h>
+#include <m_menu.h>
 
 static int X = 0, Y = 0;
 static int MX=80, MY=25;
@@ -58,7 +59,7 @@ extern int use_hdd;
 extern const char *hdd_wads_folder;
 
 /// cosmito
-extern char		currentWadName[20];
+//extern char		currentWadName[20];
 
 #define R_OK	4
 static int access(char *file, int mode)

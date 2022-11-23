@@ -74,7 +74,7 @@ rcsid[] = "$Id: g_game.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 #define SAVEGAMESIZE	0x2c000
 #define SAVESTRINGSIZE	24
 
-char		currentWadName[20];
+//char		currentWadName[20];
 
 boolean	G_CheckDemoStatus (void);
 void	G_ReadDemoTiccmd (ticcmd_t* cmd);
