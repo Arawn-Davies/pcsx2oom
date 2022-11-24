@@ -324,7 +324,7 @@ int main( int argc, char**	argv )
         printf(" ... created mc0:PCSX2OOM ...\n");
     }
     else
-       close(handle);
+       fclose(handle);
 
 
     /// config
