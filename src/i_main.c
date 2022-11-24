@@ -273,28 +273,6 @@ int main( int argc, char**	argv )
 
     // SJPCM
     SifExecModuleBuffer(SJPCM, size_SJPCM, 0, NULL, &ret);
-    
-//#ifdef PS2HDD
-//	SifExecModuleBuffer(poweroff, size_poweroff, 0, NULL, &ret);
-//    SifExecModuleBuffer(iomanX, size_iomanX, 0, NULL, &ret);
-//	SifExecModuleBuffer(fileXio, size_fileXio, 0, NULL, &ret);
-//	SifExecModuleBuffer(ps2dev9, size_ps2dev9, 0, NULL, &ret);
-//	SifExecModuleBuffer(ps2atad, size_ps2atad, 0, NULL, &ret);
-//	static char hddarg[] = "-o" "\0" "4" "\0" "-n" "\0" "20";
-//    SifExecModuleBuffer(ps2hdd, size_ps2hdd, sizeof(hddarg), hddarg, &ret);
-//	if (ret < 0)
-//    {
-//        printf("Failed to load module: PS2HDD.IRX");
-//        scr_printf("Failed to load module: PS2HDD.IRX");
-//    }
-//	static char pfsarg[] = "-m" "\0" "4" "\0" "-o" "\0" "10" "\0" "-n" "\0" "40";
-//	SifExecModuleBuffer(ps2fs, size_ps2fs, sizeof(pfsarg), pfsarg, &ret);
-//	if (ret < 0)
-//    {
-//        scr_printf("Failed to load module: PS2FS.IRX");
-//        printf("Failed to load module: PS2FS.IRX");
-//    }
-//#endif
 
     // USB mass support
     SifExecModuleBuffer(usbd, size_usbd, 0, NULL, &ret);
