@@ -316,14 +316,14 @@ int main( int argc, char**	argv )
         printf("mc0 trouble... should save to other device... To implement\n");  /// TBD
     
     // create save/load dir (mc0:PCSX2OOM)
-    int handle = fioOpen ("mc0:PCSX2OOM/doomsav0.dsg", O_RDONLY);
+    int handle = fopen ("mc0:PCSX2OOM/doomsav0.dsg", "r");
     if (handle < 0)
     {
-        fioMkdir("mc0:PCSX2OOM"); // Make sure it exists
+        mkdir("mc0:PCSX2OOM", "w"); // Make sure it exists
         printf(" ... created mc0:PCSX2OOM ...\n");
     }
     else
-        fioClose(handle);
+       fclose(handle);
 
 
     /// config
