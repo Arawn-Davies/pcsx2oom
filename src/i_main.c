@@ -250,7 +250,7 @@ int main( int argc, char**	argv )
 	SifInitRpc(0); 
 
     init_scr();
-    scr_printf_nocursor("                           --==== PCSX2OOM v1.0.5.0 ====--\n\n\n");
+    scr_printf_nocursor("                           --==== PCSX2OOM ====--\n\n\n");
 
     int ret;
     printf("sample: kicking IRXs\n");
