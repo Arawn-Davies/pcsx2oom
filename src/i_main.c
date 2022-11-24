@@ -319,7 +319,8 @@ int main( int argc, char**	argv )
     int handle = fopen ("mc0:PCSX2OOM/doomsav0.dsg", "r");
     if (handle < 0)
     {
-        mkdir("mc0:PCSX2OOM", "w"); // Make sure it exists
+        //mkdir("mc0:PCSX2OOM", "w"); // Make sure it exists
+        mkdir("mc0:PCSX2OOM", O_WRONLY); // Make sure it exists
         printf(" ... created mc0:PCSX2OOM ...\n");
     }
     else
@@ -540,7 +541,7 @@ int main( int argc, char**	argv )
     }
 
 
-    SjPCM_Init(1);		// sync mode
+    //SjPCM_Init(1);		// sync mode
 
     printf("SjPCM_Setvol ...\n");
     SjPCM_Setvol(0x3fff);

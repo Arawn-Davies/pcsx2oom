@@ -478,19 +478,19 @@ menu_t SaveDef =
 //
 void M_ReadSaveStrings(void)
 {
-    // FILE           *handle;   /// cosmito : for fioOpen type is s32
-    s32 handle;
+    FILE *handle;   /// cosmito : for fioOpen type is s32
+    //s32 handle;
     int count;
     int i;
     char name[256];
 
     for (i = 0; i < load_end; i++)
     {
-        // sprintf(name,"mc0:PCSX2OOM/"SAVEGAMENAME"%d.dsg",i);
-        sprintf(name, "mc0:PCSX2OOM/%s%d.dsg", currentWadName, i);
+        // sprintf(name,"mc0:PS2DOOM/"SAVEGAMENAME"%d.dsg",i);
+        sprintf(name, "mc0:PS2DOOM/%s%d.dsg", currentWadName, i);
 
-        // handle = fopen (name, "r");
-        handle = fioOpen(name, O_RDONLY);
+        handle = fopen (name, "r");
+        //handle = fioOpen(name, O_RDONLY);
         if (/*handle == NULL || */ handle < 0)
         {
             strcpy(&savegamestrings[i][0], EMPTYSTRING);
@@ -499,8 +499,8 @@ void M_ReadSaveStrings(void)
         }
         // count = fread (&savegamestrings[i], 1, SAVESTRINGSIZE, handle);
         count = fioRead(handle, &savegamestrings[i], SAVESTRINGSIZE);
-        // fclose (handle);
-        fioClose(handle);
+        fclose (handle);
+        //fioClose(handle);
         LoadMenu[i].status = 1;
     }
 }
@@ -549,8 +549,8 @@ void M_LoadSelect(int choice)
         // sprintf(name,"c:\\doomdata\\"SAVEGAMENAME"%d.dsg",choice);
         sprintf(name, "c:\\doomdata\\%s%d.dsg", currentWadName, choice);
     else
-        // sprintf(name,"mc0:PCSX2OOM/"SAVEGAMENAME"%d.dsg",choice);
-        sprintf(name, "mc0:PCSX2OOM/%s%d.dsg", currentWadName, choice);
+        // sprintf(name,"mc0:PS2DOOM/"SAVEGAMENAME"%d.dsg",choice);
+        sprintf(name, "mc0:PS2DOOM/%s%d.dsg", currentWadName, choice);
     G_LoadGame(name);
     M_ClearMenus();
 }

@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# PCSX2OOM build files
+*/*.wad
+*/*.s
+*/*.WAD
+*/*.S
+*/*.ELF
+*/*.elf
+*/*.ISO
+*/*.iso
