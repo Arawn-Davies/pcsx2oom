@@ -1,5 +1,5 @@
-#ifndef _PS2DOOM_H_
-#define _PS2DOOM_H_
+#ifndef _PCSX2OOM_H_
+#define _PCSX2OOM_H_
 
 #include <tcpip.h>
 

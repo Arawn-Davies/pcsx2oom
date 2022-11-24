@@ -54,7 +54,7 @@ rcsid[] = "$Id: m_bbox.c,v 1.1 1997/02/03 22:45:10 b1 Exp $";
 #ifdef _EE // PlayStation 2 Emotion Engine
 #include <tcpip.h>
 #include <ps2ip.h>
-#include "ps2doom.h"
+#include "pcsx2oom.h"
 #define IPPORT_USERRESERVED	1024 // ??
 #else
 #error You should hack this file for your BSD sockets layer

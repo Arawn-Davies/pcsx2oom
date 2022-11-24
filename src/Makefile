@@ -7,20 +7,27 @@ p_doors.o p_enemy.o p_floor.o p_inter.o p_lights.o p_map.o p_maputl.o \
 p_mobj.o p_plats.o p_pspr.o p_saveg.o p_setup.o p_sight.o p_spec.o \
 p_switch.o p_telept.o p_tick.o p_user.o r_bsp.o r_data.o r_draw.o \
 r_main.o r_plane.o r_segs.o r_sky.o r_things.o s_sound.o sounds.o \
-st_lib.o st_stuff.o tables.o v_video.o w_wad.o wi_stuff.o z_zone.o ps2doom.o mixer_thread.o mixer.o cosmitoFileIO.o sjpcm_rpc.o usbd.s usbhdfsd.s SJPCM.s freesd.s \
+st_lib.o st_stuff.o tables.o v_video.o w_wad.o wi_stuff.o z_zone.o pcsx2oom.o mixer_thread.o mixer.o cosmitoFileIO.o sjpcm_rpc.o usbd.s usbhdfsd.s SJPCM.s freesd.s \
 iomanX.o fileXio.o ps2dev9.o ps2atad.o ps2fs.o ps2hdd.o poweroff.o
 
-EE_BIN = ps2doom.elf
+EE_BIN = PCSX2OOM.ELF
 
 EE_INCS = -I$(PS2SDK)/ports/include/SDL -I$(PS2SDK)/ports/include
 EE_LDFLAGS = -L$(PS2SDK)/ports/lib -L$(PS2DEV)/gsKit/lib 
 EE_LIBS = -lsdlmain -lsdlmixer -lsdl -lgskit -lcdvd -lps2ip -ldebug -lconfig -lmc -lc -lhdd -lfileXio -lpoweroff -lnetman
 EE_CFLAGS = -DUSE_RWOPS -DHAVE_CONFIG_H -DHAVE_MIXER #-g
 
+
+
 all: $(EE_BIN)
 
+iso: $(EE_BIN)
+	cp PCSX2OOM.ELF ../bin/
+	mkisofs -l -o PCSX2OOM.ISO ../bin/*
+	
+
 clean:
-	rm -f $(EE_OBJS) $(EE_BIN)
+	rm -f $(EE_OBJS) $(EE_BIN) PCSX2OOM.ISO ../bin/*.ELF
 
 run:
 	ps2client execee host:$(EE_BIN)
