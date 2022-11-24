@@ -486,8 +486,8 @@ void M_ReadSaveStrings(void)
 
     for (i = 0; i < load_end; i++)
     {
-        // sprintf(name,"mc0:PS2DOOM/"SAVEGAMENAME"%d.dsg",i);
-        sprintf(name, "mc0:PS2DOOM/%s%d.dsg", currentWadName, i);
+        // sprintf(name,"mc0:PCSX2OOM/"SAVEGAMENAME"%d.dsg",i);
+        sprintf(name, "mc0:PCSX2OOM/%s%d.dsg", currentWadName, i);
 
         // handle = fopen (name, "r");
         handle = fioOpen(name, O_RDONLY);
@@ -549,8 +549,8 @@ void M_LoadSelect(int choice)
         // sprintf(name,"c:\\doomdata\\"SAVEGAMENAME"%d.dsg",choice);
         sprintf(name, "c:\\doomdata\\%s%d.dsg", currentWadName, choice);
     else
-        // sprintf(name,"mc0:PS2DOOM/"SAVEGAMENAME"%d.dsg",choice);
-        sprintf(name, "mc0:PS2DOOM/%s%d.dsg", currentWadName, choice);
+        // sprintf(name,"mc0:PCSX2OOM/"SAVEGAMENAME"%d.dsg",choice);
+        sprintf(name, "mc0:PCSX2OOM/%s%d.dsg", currentWadName, choice);
     G_LoadGame(name);
     M_ClearMenus();
 }

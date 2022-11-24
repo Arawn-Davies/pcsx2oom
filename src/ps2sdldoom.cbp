@@ -213,10 +213,10 @@
 		<Unit filename="p_user.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="ps2doom.c">
+		<Unit filename="PCSX2OOM.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="ps2doom.h" />
+		<Unit filename="PCSX2OOM.h" />
 		<Unit filename="r_bsp.c">
 			<Option compilerVar="CC" />
 		</Unit>

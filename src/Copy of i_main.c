@@ -246,7 +246,7 @@ int main( int argc, char**	argv )
 	SifInitRpc(0); 
 
     init_scr();
-    scr_printf_nocursor("                           --==== PS2DOOM v1.0.5.0 ====--\n\n\n");
+    scr_printf_nocursor("                           --==== PCSX2OOM ====--\n\n\n");
 
     int ret;
     printf("sample: kicking IRXs\n");
@@ -333,12 +333,12 @@ int main( int argc, char**	argv )
     if (ret != 0)
         printf("mc0 trouble... should save to other device... To implement\n");  /// TBD
     
-    // create save/load dir (mc0:PS2DOOM)
-    int handle = fioOpen ("mc0:PS2DOOM/doomsav0.dsg", O_RDONLY);
+    // create save/load dir (mc0:PCSX2OOM)
+    int handle = fioOpen ("mc0:PCSX2OOM/doomsav0.dsg", O_RDONLY);
     if (handle < 0)
     {
-        fioMkdir("mc0:PS2DOOM"); // Make sure it exists
-        printf(" ... created mc0:PS2DOOM ...\n");
+        fioMkdir("mc0:PCSX2OOM"); // Make sure it exists
+        printf(" ... created mc0:PCSX2OOM ...\n");
     }
     else
         fioClose(handle);
@@ -385,7 +385,7 @@ int main( int argc, char**	argv )
 */
 
     /// config
-    sprintf(configfile, "%s%s", fullPath, "ps2doom.config");
+    sprintf(configfile, "%s%s", fullPath, "PCSX2OOM.config");
 printf("%s\n", configfile);
 printf("a****\n");
 
@@ -397,8 +397,8 @@ printf("b****\n");
     {
 printf("c****\n");
 
-        printf("file '%s' not found. Going to try 'mc0:PS2DOOM/ps2doom.config'\n", configfile);
-        sprintf(configfile, "%s", "mc0:PS2DOOM/ps2doom.config");
+        printf("file '%s' not found. Going to try 'mc0:PCSX2OOM/PCSX2OOM.config'\n", configfile);
+        sprintf(configfile, "%s", "mc0:PCSX2OOM/PCSX2OOM.config");
 printf("%s\n", configfile);
         fp = fopen(configfile, "rb");
         if(!fp)
@@ -434,12 +434,12 @@ printf("0****\n");
         if(x)
         {
         printf("2****\n");
-            // Process each ps2doom.controls config entries
+            // Process each PCSX2OOM.controls config entries
             int nConfigEntries = sizeof(config_buttons)/sizeof(config_buttons[0]);
             for (i=0; i<nConfigEntries; i++)
             {
                 printf("3****\n");
-                sprintf(config_probestring, "%s%s", "ps2doom.controls.", config_buttons[i].name);
+                sprintf(config_probestring, "%s%s", "PCSX2OOM.controls.", config_buttons[i].name);
 printf("%s\n", config_probestring);
                 if(! config_lookup_string(&cfg, config_probestring, &s))
                 {

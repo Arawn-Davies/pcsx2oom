@@ -250,7 +250,7 @@ int main( int argc, char**	argv )
 	SifInitRpc(0); 
 
     init_scr();
-    scr_printf_nocursor("                           --==== PS2DOOM v1.0.5.0 ====--\n\n\n");
+    scr_printf_nocursor("                           --==== PCSX2OOM v1.0.5.0 ====--\n\n\n");
 
     int ret;
     printf("sample: kicking IRXs\n");
@@ -315,27 +315,27 @@ int main( int argc, char**	argv )
     if (ret != 0)
         printf("mc0 trouble... should save to other device... To implement\n");  /// TBD
     
-    // create save/load dir (mc0:PS2DOOM)
-    int handle = fioOpen ("mc0:PS2DOOM/doomsav0.dsg", O_RDONLY);
+    // create save/load dir (mc0:PCSX2OOM)
+    int handle = fioOpen ("mc0:PCSX2OOM/doomsav0.dsg", O_RDONLY);
     if (handle < 0)
     {
-        fioMkdir("mc0:PS2DOOM"); // Make sure it exists
-        printf(" ... created mc0:PS2DOOM ...\n");
+        fioMkdir("mc0:PCSX2OOM"); // Make sure it exists
+        printf(" ... created mc0:PCSX2OOM ...\n");
     }
     else
         fioClose(handle);
 
 
     /// config
-    sprintf(configfile, "%s%s", fullPath, "ps2doom.config");
+    sprintf(configfile, "%s%s", fullPath, "PCSX2OOM.config");
 
     // First, try to load from localpath. If fails, try from 'mc0:'
     int configLoadSuccess = 0;
     fp = fopen(configfile, "rb");
     if(!fp)
     {
-        printf("file '%s' not found. Going to try 'mc0:PS2DOOM/ps2doom.config'\n", configfile);
-        sprintf(configfile, "%s", "mc0:PS2DOOM/ps2doom.config");
+        printf("file '%s' not found. Going to try 'mc0:PCSX2OOM/PCSX2OOM.config'\n", configfile);
+        sprintf(configfile, "%s", "mc0:PCSX2OOM/PCSX2OOM.config");
 
         fp = fopen(configfile, "rb");
         if(!fp)
@@ -373,11 +373,11 @@ int main( int argc, char**	argv )
         fclose(fp);
         if(x)
         {
-            // Process each ps2doom.controls config entries
+            // Process each PCSX2OOM.controls config entries
             int nConfigEntries = sizeof(config_buttons)/sizeof(config_buttons[0]);
             for (i=0; i<nConfigEntries; i++)
             {
-                sprintf(config_probestring, "%s%s", "ps2doom.controls.", config_buttons[i].name);
+                sprintf(config_probestring, "%s%s", "PCSX2OOM.controls.", config_buttons[i].name);
                 if(! config_lookup_string(&cfg, config_probestring, &s))
                 {
 #ifdef DEBUG_LIBCONFIG
@@ -405,7 +405,7 @@ int main( int argc, char**	argv )
             printf("error on line %d: %s\n", cfg.error_line, cfg.error_text);
 
         use_hdd = CONFIG_FALSE;
-        sprintf(config_probestring, "%s", "ps2doom.hdd.use_hdd");
+        sprintf(config_probestring, "%s", "PCSX2OOM.hdd.use_hdd");
         if(!config_lookup_bool(&cfg, config_probestring, &use_hdd))
         {
             use_hdd = CONFIG_FALSE;
@@ -419,11 +419,11 @@ int main( int argc, char**	argv )
 
         if(use_hdd == CONFIG_TRUE)
         {
-            sprintf(config_probestring, "%s", "ps2doom.hdd.path_to_partition");
+            sprintf(config_probestring, "%s", "PCSX2OOM.hdd.path_to_partition");
             if(!config_lookup_string(&cfg, config_probestring, &hdd_path_to_partition))
             {
                 printf("NOT FOUND %s\n", config_probestring);
-                scr_printf("Error: Value '%s' at ps2doom.config not found\n", config_probestring);
+                scr_printf("Error: Value '%s' at PCSX2OOM.config not found\n", config_probestring);
                 SleepThread();
             }
             else
@@ -431,11 +431,11 @@ int main( int argc, char**	argv )
                 printf("found: %s = %s\n", config_probestring, hdd_path_to_partition);
             }
 
-            sprintf(config_probestring, "%s", "ps2doom.hdd.wads_folder");
+            sprintf(config_probestring, "%s", "PCSX2OOM.hdd.wads_folder");
             if(!config_lookup_string(&cfg, config_probestring, &hdd_wads_folder))
             {
                 printf("NOT FOUND %s\n", config_probestring);
-                scr_printf("Error: Value '%s' at ps2doom.config not found\n", config_probestring);
+                scr_printf("Error: Value '%s' at PCSX2OOM.config not found\n", config_probestring);
                 SleepThread();
             }
             else
@@ -446,7 +446,7 @@ int main( int argc, char**	argv )
 
         //
         swap_analogsticks = CONFIG_FALSE;
-        sprintf(config_probestring, "%s", "ps2doom.controls.switches.swap_analogsticks");
+        sprintf(config_probestring, "%s", "PCSX2OOM.controls.switches.swap_analogsticks");
         if(!config_lookup_bool(&cfg, config_probestring, &swap_analogsticks))
         {
             swap_analogsticks = CONFIG_FALSE;

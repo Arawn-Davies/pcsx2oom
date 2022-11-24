@@ -1843,8 +1843,8 @@ void D_DoomMain (void)
 	    //sprintf(file, "c:\\doomdata\\"SAVEGAMENAME"%c.dsg",myargv[p+1][0]);
         sprintf(file, "c:\\doomdata\\%s%c.dsg", currentWadName, myargv[p+1][0]);
 	else
-        //sprintf(file, "mc0:PS2DOOM/"SAVEGAMENAME"%c.dsg",myargv[p+1][0]);
-        sprintf(file, "mc0:PS2DOOM/%s%c.dsg",currentWadName,myargv[p+1][0]);
+        //sprintf(file, "mc0:PCSX2OOM/"SAVEGAMENAME"%c.dsg",myargv[p+1][0]);
+        sprintf(file, "mc0:PCSX2OOM/%s%c.dsg",currentWadName,myargv[p+1][0]);
 	G_LoadGame (file);
     }
 	
