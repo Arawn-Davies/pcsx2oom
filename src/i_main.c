@@ -250,7 +250,7 @@ int main( int argc, char**	argv )
 	SifInitRpc(0); 
 
     init_scr();
-    scr_printf_nocursor("                           --==== PS2DOOM v1.0.5.0 ====--\n\n\n");
+    scr_printf_nocursor("                           --==== PCSX2OOM ====--\n\n\n");
 
     int ret;
     printf("sample: kicking IRXs\n");
@@ -273,28 +273,6 @@ int main( int argc, char**	argv )
 
     // SJPCM
     SifExecModuleBuffer(SJPCM, size_SJPCM, 0, NULL, &ret);
-    
-//#ifdef PS2HDD
-//	SifExecModuleBuffer(poweroff, size_poweroff, 0, NULL, &ret);
-//    SifExecModuleBuffer(iomanX, size_iomanX, 0, NULL, &ret);
-//	SifExecModuleBuffer(fileXio, size_fileXio, 0, NULL, &ret);
-//	SifExecModuleBuffer(ps2dev9, size_ps2dev9, 0, NULL, &ret);
-//	SifExecModuleBuffer(ps2atad, size_ps2atad, 0, NULL, &ret);
-//	static char hddarg[] = "-o" "\0" "4" "\0" "-n" "\0" "20";
-//    SifExecModuleBuffer(ps2hdd, size_ps2hdd, sizeof(hddarg), hddarg, &ret);
-//	if (ret < 0)
-//    {
-//        printf("Failed to load module: PS2HDD.IRX");
-//        scr_printf("Failed to load module: PS2HDD.IRX");
-//    }
-//	static char pfsarg[] = "-m" "\0" "4" "\0" "-o" "\0" "10" "\0" "-n" "\0" "40";
-//	SifExecModuleBuffer(ps2fs, size_ps2fs, sizeof(pfsarg), pfsarg, &ret);
-//	if (ret < 0)
-//    {
-//        scr_printf("Failed to load module: PS2FS.IRX");
-//        printf("Failed to load module: PS2FS.IRX");
-//    }
-//#endif
 
     // USB mass support
     SifExecModuleBuffer(usbd, size_usbd, 0, NULL, &ret);
@@ -337,27 +315,27 @@ int main( int argc, char**	argv )
     if (ret != 0)
         printf("mc0 trouble... should save to other device... To implement\n");  /// TBD
     
-    // create save/load dir (mc0:PS2DOOM)
-    int handle = fioOpen ("mc0:PS2DOOM/doomsav0.dsg", O_RDONLY);
+    // create save/load dir (mc0:PCSX2OOM)
+    int handle = fopen ("mc0:PCSX2OOM/doomsav0.dsg", "r");
     if (handle < 0)
     {
-        mkdir("mc0:PS2DOOM", 0777, O_RDONLY | O_WRONLY); // Make sure it exists
-        printf(" ... created mc0:PS2DOOM ...\n");
+        mkdir("mc0:PS2DOOM", "w"); // Make sure it exists
+        printf(" ... created mc0:PCSX2OOM ...\n");
     }
     else
-       close(handle);
+       fclose(handle);
 
 
     /// config
-    sprintf(configfile, "%s%s", fullPath, "ps2doom.config");
+    sprintf(configfile, "%s%s", fullPath, "PCSX2OOM.config");
 
     // First, try to load from localpath. If fails, try from 'mc0:'
     int configLoadSuccess = 0;
     fp = fopen(configfile, "rb");
     if(!fp)
     {
-        printf("file '%s' not found. Going to try 'mc0:PS2DOOM/ps2doom.config'\n", configfile);
-        sprintf(configfile, "%s", "mc0:PS2DOOM/ps2doom.config");
+        printf("file '%s' not found. Going to try 'mc0:PCSX2OOM/PCSX2OOM.config'\n", configfile);
+        sprintf(configfile, "%s", "mc0:PCSX2OOM/PCSX2OOM.config");
 
         fp = fopen(configfile, "rb");
         if(!fp)
@@ -395,11 +373,11 @@ int main( int argc, char**	argv )
         fclose(fp);
         if(x)
         {
-            // Process each ps2doom.controls config entries
+            // Process each PCSX2OOM.controls config entries
             int nConfigEntries = sizeof(config_buttons)/sizeof(config_buttons[0]);
             for (i=0; i<nConfigEntries; i++)
             {
-                sprintf(config_probestring, "%s%s", "ps2doom.controls.", config_buttons[i].name);
+                sprintf(config_probestring, "%s%s", "PCSX2OOM.controls.", config_buttons[i].name);
                 if(! config_lookup_string(&cfg, config_probestring, &s))
                 {
 #ifdef DEBUG_LIBCONFIG
@@ -427,7 +405,7 @@ int main( int argc, char**	argv )
             printf("error on line %d: %s\n", cfg.error_line, cfg.error_text);
 
         use_hdd = CONFIG_FALSE;
-        sprintf(config_probestring, "%s", "ps2doom.hdd.use_hdd");
+        sprintf(config_probestring, "%s", "PCSX2OOM.hdd.use_hdd");
         if(!config_lookup_bool(&cfg, config_probestring, &use_hdd))
         {
             use_hdd = CONFIG_FALSE;
@@ -441,11 +419,11 @@ int main( int argc, char**	argv )
 
         if(use_hdd == CONFIG_TRUE)
         {
-            sprintf(config_probestring, "%s", "ps2doom.hdd.path_to_partition");
+            sprintf(config_probestring, "%s", "PCSX2OOM.hdd.path_to_partition");
             if(!config_lookup_string(&cfg, config_probestring, &hdd_path_to_partition))
             {
                 printf("NOT FOUND %s\n", config_probestring);
-                scr_printf("Error: Value '%s' at ps2doom.config not found\n", config_probestring);
+                scr_printf("Error: Value '%s' at PCSX2OOM.config not found\n", config_probestring);
                 SleepThread();
             }
             else
@@ -453,11 +431,11 @@ int main( int argc, char**	argv )
                 printf("found: %s = %s\n", config_probestring, hdd_path_to_partition);
             }
 
-            sprintf(config_probestring, "%s", "ps2doom.hdd.wads_folder");
+            sprintf(config_probestring, "%s", "PCSX2OOM.hdd.wads_folder");
             if(!config_lookup_string(&cfg, config_probestring, &hdd_wads_folder))
             {
                 printf("NOT FOUND %s\n", config_probestring);
-                scr_printf("Error: Value '%s' at ps2doom.config not found\n", config_probestring);
+                scr_printf("Error: Value '%s' at PCSX2OOM.config not found\n", config_probestring);
                 SleepThread();
             }
             else
@@ -468,7 +446,7 @@ int main( int argc, char**	argv )
 
         //
         swap_analogsticks = CONFIG_FALSE;
-        sprintf(config_probestring, "%s", "ps2doom.controls.switches.swap_analogsticks");
+        sprintf(config_probestring, "%s", "PCSX2OOM.controls.switches.swap_analogsticks");
         if(!config_lookup_bool(&cfg, config_probestring, &swap_analogsticks))
         {
             swap_analogsticks = CONFIG_FALSE;

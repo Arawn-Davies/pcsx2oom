@@ -74,7 +74,7 @@ rcsid[] = "$Id: g_game.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 #define SAVEGAMESIZE	0x2c000
 #define SAVESTRINGSIZE	24
 
-char		currentWadName[20];
+//char		currentWadName[20];
 
 boolean	G_CheckDemoStatus (void);
 void	G_ReadDemoTiccmd (ticcmd_t* cmd);
@@ -1355,8 +1355,8 @@ void G_DoSaveGame (void)
         sprintf(name,"c:\\doomdata\\%s%d.dsg",currentWadName,savegameslot);
     else
         //sprintf (name,SAVEGAMENAME"%d.dsg",savegameslot);
-        //sprintf (name,"mc0:PS2DOOM/"SAVEGAMENAME"%d.dsg",savegameslot);
-        sprintf (name,"mc0:PS2DOOM/%s%d.dsg",currentWadName,savegameslot);
+        //sprintf (name,"mc0:PCSX2OOM/"SAVEGAMENAME"%d.dsg",savegameslot);
+        sprintf (name,"mc0:PCSX2OOM/%s%d.dsg",currentWadName,savegameslot);
     description = savedescription;
 printf("savename : %s\n", name);        ///
     save_p = savebuffer = screens[1]+0x4000;
