@@ -29,8 +29,7 @@ rcsid[] = "$Id: i_main.c,v 1.4 1997/02/03 22:45:10 b1 Exp $";
 #include "doomdef.h"
 
 #include "m_argv.h"
-#include "libconfig.h"
-
+#include <libconfig.h>
 #include "d_main.h"
 
 #include <sifrpc.h>
@@ -316,14 +315,16 @@ int main( int argc, char**	argv )
         printf("mc0 trouble... should save to other device... To implement\n");  /// TBD
     
     // create save/load dir (mc0:PCSX2OOM)
+    //int handle = 0;
+    //open ("mc0:PCSX2OOM/doomsav0.dsg", handle, O_RDONLY);
     int handle = fopen ("mc0:PCSX2OOM/doomsav0.dsg", "r");
     if (handle < 0)
     {
-        mkdir("mc0:PCSX2OOM", "w"); // Make sure it exists
+        mkdir("mc0:PCSX2OOM", O_WRONLY); // Make sure it exists
         printf(" ... created mc0:PCSX2OOM ...\n");
     }
     else
-       fclose(handle);
+       close(handle);
 
 
     /// config
@@ -540,10 +541,10 @@ int main( int argc, char**	argv )
     }
 
 
-    SjPCM_Init(1);		// sync mode
+    //SjPCM_Init(1);		// sync mode
 
     printf("SjPCM_Setvol ...\n");
-    SjPCM_Setvol(0x3fff);
+    //SjPCM_Setvol(0x3fff);
 
     ChangeThreadPriority ( GetThreadId (), 42 );
     Mixer_Init();       // TBD : arg number channels
