@@ -36,37 +36,37 @@ reset:
 	ps2client reset
 
 usbd.s : usbd.irx
-	bin2s usbd.irx usbd.s usbd
+	bin2c usbd.irx usbd.s usbd
 
 usbhdfsd.s : usbhdfsd.irx
-	bin2s usbhdfsd.irx usbhdfsd.s usbhdfsd
+	bin2c usbhdfsd.irx usbhdfsd.s usbhdfsd
 	
 SJPCM.s : SJPCM.IRX
-	bin2s SJPCM.IRX SJPCM.s SJPCM
+	bin2c SJPCM.IRX SJPCM.s SJPCM
 
 freesd.s : freesd-1.01.irx
-	bin2s freesd-1.01.irx freesd.s freesd
+	bin2c freesd-1.01.irx freesd.s freesd
 	
 iomanX.s : iomanX.irx
-	bin2s iomanX.irx iomanX.s iomanX
+	bin2c iomanX.irx iomanX.s iomanX
 
 fileXio.s : fileXio.irx
-	bin2s fileXio.irx fileXio.s fileXio
+	bin2c fileXio.irx fileXio.s fileXio
 
 ps2dev9.s : ps2dev9.irx
-	bin2s ps2dev9.irx ps2dev9.s ps2dev9
+	bin2c ps2dev9.irx ps2dev9.s ps2dev9
 
 ps2atad.s : ps2atad.irx
-	bin2s ps2atad.irx ps2atad.s ps2atad
+	bin2c ps2atad.irx ps2atad.s ps2atad
 
 ps2hdd.s : ps2hdd.irx
-	bin2s ps2hdd.irx ps2hdd.s ps2hdd
+	bin2c ps2hdd.irx ps2hdd.s ps2hdd
 
 ps2fs.s : ps2fs.irx
-	bin2s ps2fs.irx ps2fs.s ps2fs
+	bin2c ps2fs.irx ps2fs.s ps2fs
 
 poweroff.s : poweroff.irx
-	bin2s poweroff.irx poweroff.s poweroff
+	bin2c poweroff.irx poweroff.s poweroff
 	
 		
 include $(PS2SDK)/samples/Makefile.pref
